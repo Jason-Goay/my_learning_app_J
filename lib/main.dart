@@ -11,9 +11,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    Widget material = MaterialApp(
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.onGenerateRoute,
     );
+    return Container();
   }
 }
