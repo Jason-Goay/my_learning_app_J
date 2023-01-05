@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:my_learning_app/screen/src/home_screen.dart';
+
+import 'package:my_learning_app/screen/screen.dart';
 import 'package:my_learning_app/utils/utils.dart';
+
+// import 'intro_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "/";
@@ -30,10 +33,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       body: Center(
-        child: SizedBox(
-            width: ScreenUtils.screenWidth * 0.8,
-            height: ScreenUtils.screenHeight * 0.1,
-            child: Image.asset(AppAssets.appLogo)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+                width: ScreenUtils.screenWidth * 0.7,
+                height: ScreenUtils.screenHeight * 0.2,
+                child: Image.asset(AppAssets.appLogo)),
+            const CircularProgressIndicator(
+              color: AppColor.grey,
+            )
+          ],
+        ),
       ),
     );
   }
