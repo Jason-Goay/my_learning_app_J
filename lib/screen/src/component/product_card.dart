@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 class ProductCard extends StatelessWidget {
   final String image;
   final String title;
-  final String price;
+  final double price;
   final VoidCallback onTap;
   final Color bgColor;
   const ProductCard({
@@ -19,6 +19,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -38,24 +39,21 @@ class ProductCard extends StatelessWidget {
               ),
               child: Image.asset(
                 image,
-                height: 132,
+                height: 100,
+                fit: BoxFit.fill,
               ),
             ),
             const SizedBox(height: 10 / 2),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(color: Colors.black),
-                  ),
-                ),
-                const SizedBox(width: 10 / 4),
-                Text(
-                  "\$" + price.toString(),
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-              ],
+            Expanded(
+              child: Text(
+                title,
+                style: textTheme.bodySmall,
+              ),
+            ),
+            const SizedBox(width: 10 / 4),
+            Text(
+              "\$$price",
+              style: textTheme.subtitle2,
             )
           ],
         ),

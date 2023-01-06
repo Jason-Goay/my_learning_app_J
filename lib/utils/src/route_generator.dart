@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_learning_app/screen/screen.dart';
+import 'package:my_learning_app/screen/src/details_screen.dart';
 import 'package:my_learning_app/screen/src/splash_screen.dart';
 
 class RouteGenerator {
@@ -11,6 +12,12 @@ class RouteGenerator {
         break;
       case HomeScreen.routeName:
         builder = (_) => const HomeScreen();
+        break;
+      case DetailsScreen.routeName:
+        final product = settings.arguments as DetailsScreenArgument;
+        builder = (_) => DetailsScreen(
+              productArgument: product,
+            );
         break;
       default:
         throw UnimplementedError();

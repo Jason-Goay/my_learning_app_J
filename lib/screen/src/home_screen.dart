@@ -1,10 +1,16 @@
+import 'dart:developer';
+
 import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_learning_app/model/model.dart';
+import 'package:my_learning_app/provider/provider.dart';
+import 'package:my_learning_app/screen/src/component/product_card.dart';
+import 'package:my_learning_app/screen/src/details_screen.dart';
 import 'package:my_learning_app/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,6 +22,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   ColorScheme get colorScheme => Theme.of(context).colorScheme;
+
+  HomeTabProvider get homeTabProvider => context.read<HomeTabProvider>();
+
   late TabController _tabController;
   final List<Tab> tabs = [
     const Tab(
@@ -34,10 +43,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       text: 'Dress',
     ),
   ];
+  List<Product> shirtList =
+      product.where((element) => element.type == 'Shirt').toList();
+  List<Product> shoesList =
+      product.where((element) => element.type == 'Shoes').toList();
+  List<Product> watchList =
+      product.where((element) => element.type == 'Watch').toList();
+  List<Product> dressList =
+      product.where((element) => element.type == 'Dress').toList();
 
   @override
   void initState() {
     _tabController = TabController(vsync: this, length: tabs.length);
+    _tabController.addListener(() {
+      homeTabProvider.currentIndex = _tabController.index;
+    });
+
     super.initState();
   }
 
@@ -97,15 +118,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Widget buildContent() {
     return Container(
-      height: ScreenUtils.scaleValueH(300),
       padding: EdgeInsets.only(top: ScreenUtils.scaleValueH(10)),
       decoration: BoxDecoration(color: AppColor.grey.withOpacity(0.1)),
       child: Column(
         children: [
-          buildSearchBar(),
-          buildSlideShow(),
-          buildCategories(),
-          buildTabBar()
+          Column(
+            children: [
+              buildSearchBar(),
+              buildSlideShow(),
+              buildCategories(),
+              buildTabBar(),
+            ],
+          ),
         ],
       ),
     );
@@ -224,23 +248,75 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget buildTabBar() {
-    return TabBar(
-      labelPadding:
-          EdgeInsets.symmetric(horizontal: ScreenUtils.scaleValueW(25)),
-      labelColor: AppColor.white,
-      unselectedLabelColor: colorScheme.secondary,
-      indicator: BoxDecoration(
-        border: Border.all(color: colorScheme.primary),
-        borderRadius: BorderRadius.circular(50),
-        color: colorScheme.primary,
-      ),
-      indicatorPadding: EdgeInsets.symmetric(
-          vertical: ScreenUtils.scaleValueH(5),
-          horizontal: ScreenUtils.scaleValueW(5)),
-      isScrollable: true,
-      controller: _tabController,
-      tabs: tabs,
+    return Column(
+      children: [
+        TabBar(
+          labelPadding:
+              EdgeInsets.symmetric(horizontal: ScreenUtils.scaleValueW(25)),
+          labelColor: AppColor.white,
+          unselectedLabelColor: colorScheme.secondary,
+          indicator: BoxDecoration(
+            border: Border.all(color: colorScheme.primary),
+            borderRadius: BorderRadius.circular(50),
+            color: colorScheme.primary,
+          ),
+          indicatorPadding: EdgeInsets.symmetric(
+              vertical: ScreenUtils.scaleValueH(5),
+              horizontal: ScreenUtils.scaleValueW(5)),
+          isScrollable: true,
+          controller: _tabController,
+          tabs: tabs,
+          onTap: (value) {
+            homeTabProvider.currentIndex = value;
+            setState(() {});
+            log("CurrentINDex ${homeTabProvider.currentIndex}");
+          },
+        ),
+        buildTabView()
+      ],
     );
+  }
+
+  Widget buildProduct(List<Product> product) {
+    return SizedBox(
+      width: 500,
+      height: 500,
+      child: GridView.count(
+          primary: false,
+          padding: const EdgeInsets.all(20),
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 2,
+          children: product
+              .map((e) => ProductCard(
+                    image: e.image,
+                    bgColor: Colors.black,
+                    onTap: () {
+                      Navigator.pushNamed(context, DetailsScreen.routeName,
+                          arguments: DetailsScreenArgument(product: e));
+                    },
+                    price: e.price,
+                    title: e.title,
+                  ))
+              .toList()),
+    );
+  }
+
+  Widget buildTabView() {
+    switch (homeTabProvider.currentIndex) {
+      case 0:
+        return buildProduct(product);
+      case 1:
+        return buildProduct(shirtList);
+      case 2:
+        return buildProduct(shoesList);
+      case 3:
+        return buildProduct(watchList);
+      case 4:
+        return buildProduct(dressList);
+      default:
+        return Container();
+    }
   }
 
   List<String> imgList = [
