@@ -10,7 +10,7 @@ class DetailsScreenArgument {
   });
 }
 
-class DetailsScreen extends StatefulWidget {
+class DetailsScreen extends StatelessWidget {
   final DetailsScreenArgument productArgument;
   DetailsScreen({
     Key? key,
@@ -19,23 +19,16 @@ class DetailsScreen extends StatefulWidget {
   static const routeName = '/detail-screen';
 
   @override
-  State<DetailsScreen> createState() => _DetailsScreenState();
-}
-
-class _DetailsScreenState extends State<DetailsScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.productArgument.product.bgColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [buildAppBar(), buildContent()],
-        ),
+      backgroundColor: productArgument.product.bgColor,
+      body: Column(
+        children: [buildAppBar(context), buildContent()],
       ),
     );
   }
 
-  Widget buildAppBar() {
+  Widget buildAppBar(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: ScreenUtils.scaleValue(12),
@@ -51,9 +44,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
           child: Padding(
             padding: EdgeInsets.only(left: ScreenUtils.scaleValue(20)),
             child: Text(
-              widget.productArgument.product.title,
+              productArgument.product.title,
               maxLines: 3,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -65,20 +58,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return Column(
       children: [
         Image.asset(
-          widget.productArgument.product.image,
+          productArgument.product.image,
           // height: ScreenUtils.scaleValueH(250),
-          fit: BoxFit.fill,
+          // fit: BoxFit.fill,
         ),
-        Expanded(
-          child: Container(
-            padding:
-                EdgeInsets.symmetric(vertical: ScreenUtils.scaleValueH(150)),
-            decoration: BoxDecoration(
-                color: AppColor.aquaBlue.withOpacity(0.2),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(ScreenUtils.scaleValue(30)),
-                    topRight: Radius.circular(ScreenUtils.scaleValue(30)))),
-          ),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: ScreenUtils.scaleValueH(180)),
+          decoration: BoxDecoration(
+              color: AppColor.aquaBlue.withOpacity(0.2),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(ScreenUtils.scaleValue(30)),
+                  topRight: Radius.circular(ScreenUtils.scaleValue(30)))),
         )
       ],
     );
