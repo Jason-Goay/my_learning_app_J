@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
     );
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => HomeTabProvider()),
+      ChangeNotifierProvider(create: (_) => FavouriteProvider()),
     ], child: material);
   }
 }
