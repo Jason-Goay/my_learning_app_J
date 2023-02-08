@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:my_learning_app/utils/utils.dart';
 
 class ProductCard extends StatelessWidget {
   final String image;
@@ -32,6 +33,7 @@ class ProductCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              height: ScreenUtils.scaleValueH(70),
               width: double.infinity,
               decoration: BoxDecoration(
                 color: bgColor,
@@ -39,7 +41,7 @@ class ProductCard extends StatelessWidget {
               ),
               child: Image.asset(
                 image,
-                height: 100,
+                height: ScreenUtils.screenHeight * 0.15,
                 fit: BoxFit.fill,
               ),
             ),

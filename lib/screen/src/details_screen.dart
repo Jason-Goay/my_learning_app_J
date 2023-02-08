@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_learning_app/model/model.dart';
 import 'package:my_learning_app/provider/provider.dart';
 import 'package:my_learning_app/utils/utils.dart';
+import 'package:my_learning_app/widget/widget.dart';
 import 'package:provider/provider.dart';
 
 class DetailsScreenArgument {
@@ -26,6 +27,9 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   FavouriteProvider get favouriteProvider => context.read<FavouriteProvider>();
+  TextTheme get textTheme => Theme.of(context).textTheme;
+
+  int numOfItems = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,44 +78,89 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   Widget buildContent(BuildContext context) {
-    return
-        // Column(
-        //   children: [
-        // Image.asset(
-        //   widget.productArgument.product.image,
-        //   // height: ScreenUtils.scaleValueH(250),
-        //   // fit: BoxFit.fill,
-        // ),
-        Container(
-      height: ScreenUtils.screenHeight * 0.5,
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(
-          vertical: ScreenUtils.screenHeight,
-          horizontal: ScreenUtils.screenWidth),
-      decoration: BoxDecoration(
-          color: AppColor.aquaBlue.withOpacity(0.2),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(ScreenUtils.scaleValue(30)),
-              topRight: Radius.circular(ScreenUtils.scaleValue(30)))),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                widget.productArgument.product.title,
-                style: TextStyle(color: Colors.red),
-              ),
-            ],
-          )
+    return Column(
+      children: [
+        Image.asset(
+          widget.productArgument.product.image,
 
-          // Text(
-          //   '${widget.productArgument.product.price}',
-          //   style: TextStyle(color: Colors.red),
-          // ),
-        ],
-      ),
-      //   ),
-      // ],
+          // fit: BoxFit.fill,
+        ),
+        Container(
+          height: ScreenUtils.screenHeight * 0.5,
+          width: ScreenUtils.screenWidth,
+          decoration: BoxDecoration(
+              color: AppColor.aquaBlue.withOpacity(0.2),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(ScreenUtils.scaleValue(30)),
+                  topRight: Radius.circular(ScreenUtils.scaleValue(30)))),
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.productArgument.product.title,
+                  style: textTheme.headline5,
+                ),
+                Text(
+                  '\$${widget.productArgument.product.price.toString()}',
+                  style: textTheme.headline6,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 20),
+                  child: Text(
+                    widget.productArgument.product.description,
+                    style: textTheme.bodyText2,
+                  ),
+                ),
+                buildQuantityButton(),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
+  }
+
+  Widget buildQuantityButton() {
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () => decreaseQuantity(),
+          icon: Icon(Icons.remove),
+        ),
+        SizedBox(
+          width: ScreenUtils.scaleValueW(15),
+        ),
+        Text('$numOfItems'),
+        SizedBox(
+          width: ScreenUtils.scaleValueW(15),
+        ),
+        IconButton(
+            onPressed: () => increaseQuantity(), icon: const Icon(Icons.add)),
+        SizedBox(
+          width: ScreenUtils.scaleValueW(15),
+        ),
+        CustomElevatedButton(
+          onPressed: () {},
+          minimumSize: 10,
+          child: const Text('Add to Cart'),
+        )
+      ],
+    );
+  }
+
+  void increaseQuantity() {
+    setState(() {
+      numOfItems++;
+    });
+  }
+
+  void decreaseQuantity() {
+    if (numOfItems <= 1) return;
+    setState(() {
+      numOfItems--;
+    });
   }
 }

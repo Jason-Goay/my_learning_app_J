@@ -209,13 +209,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: ScreenUtils.scaleValue(10)),
-          padding: EdgeInsets.symmetric(
-              horizontal: ScreenUtils.scaleValue(10),
-              vertical: ScreenUtils.scaleValue(5)),
-          child: Container(),
-        )
+        // Container(
+        //   margin: EdgeInsets.symmetric(horizontal: ScreenUtils.scaleValue(10)),
+        //   padding: EdgeInsets.symmetric(
+        //       horizontal: ScreenUtils.scaleValue(10),
+        //       vertical: ScreenUtils.scaleValue(5)),
+        //   child: Container(),
+        // )
       ],
     );
   }
@@ -279,8 +279,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Widget buildProduct(List<Product> product) {
     return SizedBox(
-      width: 500,
-      height: 500,
+      width: ScreenUtils.screenWidth,
+      height: ScreenUtils.screenHeight * 0.7,
       child: GridView.count(
           primary: false,
           padding: const EdgeInsets.all(20),
