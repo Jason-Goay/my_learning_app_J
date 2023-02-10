@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_learning_app/generated/l10n.dart';
 import 'package:my_learning_app/provider/provider.dart';
+import 'package:my_learning_app/provider/src/cart_provider.dart';
 import 'package:my_learning_app/utils/utils.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +16,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Widget material = MaterialApp(
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.onGenerateRoute,
+    // Widget material = MaterialApp(
+    //   initialRoute: '/',
+    //   onGenerateRoute: RouteGenerator.onGenerateRoute,
+    //   localizationsDelegates: const [
+    //     S.delegate,
+    //     GlobalMaterialLocalizations.delegate,
+    //     GlobalWidgetsLocalizations.delegate,
+    //     GlobalCupertinoLocalizations.delegate,
+    //   ],
+    //   supportedLocales: S.delegate.supportedLocales,
+    // );
+    Widget material = MaterialApp.router(
+      title: "Go router",
+      routerConfig: router,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -29,6 +41,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => HomeTabProvider()),
       ChangeNotifierProvider(create: (_) => FavouriteProvider()),
+      ChangeNotifierProvider(create: (_) => CartProvider()),
     ], child: material);
   }
 }

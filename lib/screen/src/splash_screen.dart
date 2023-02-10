@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:my_learning_app/screen/screen.dart';
 import 'package:my_learning_app/utils/utils.dart';
@@ -21,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(seconds: 3), () {
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        context.goNamed('homeScreen');
+        // Navigator.pushReplacementNamed(context, HomeScreen.routeName);
       });
     });
   }

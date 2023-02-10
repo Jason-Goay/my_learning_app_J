@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:my_learning_app/model/model.dart';
 import 'package:my_learning_app/provider/provider.dart';
 import 'package:my_learning_app/screen/src/component/product_card.dart';
@@ -65,24 +66,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: AppColor.white,
-      //   title: Text('Home'),
-      //   leading: IconButton(
-      //     icon: const Icon(Icons.menu),
-      //     onPressed: () {},
-      //   ),
-      // ),
       body: SingleChildScrollView(
         child: Column(children: [
-          AppBar(),
+          myAppBar(),
           buildContent(),
         ]),
       ),
     );
   }
 
-  Widget AppBar() {
+  Widget myAppBar() {
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: ScreenUtils.scaleValue(12),
@@ -108,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             padding: EdgeInsets.all(ScreenUtils.scaleValue(4)),
             child: InkWell(
               child: Icon(Icons.shopping_cart),
-              onTap: () {},
+              onTap: () => context.goNamed('cartScreen'),
             ),
           ),
         )
@@ -292,8 +285,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     image: e.image,
                     bgColor: Colors.black,
                     onTap: () {
-                      Navigator.pushNamed(context, DetailsScreen.routeName,
-                          arguments: DetailsScreenArgument(product: e));
+                      context.goNamed('detailsScreen',
+                          extra: DetailsScreenArgument(product: e));
+                      // Navigator.pushNamed(context, DetailsScreen.routeName,
+                      //     arguments: DetailsScreenArgument(product: e));
                     },
                     price: e.price,
                     title: e.title,
