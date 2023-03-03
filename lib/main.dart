@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:my_learning_app/generated/l10n.dart';
 import 'package:my_learning_app/provider/provider.dart';
 import 'package:my_learning_app/provider/src/cart_provider.dart';
@@ -6,7 +7,8 @@ import 'package:my_learning_app/utils/utils.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 

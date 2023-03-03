@@ -8,6 +8,7 @@ class Product {
   final Color bgColor;
   final String type;
   final String description;
+  final int quantity;
   Product(
       {required this.image,
       required this.title,
@@ -15,16 +16,19 @@ class Product {
       required this.price,
       this.bgColor = const Color(0xFFEFEFF2),
       required this.type,
-      required this.description});
+      required this.description,
+      required this.quantity});
 
-  Product.fromMap(Map<dynamic, dynamic> data)
-      : id = data['id'],
+  Product.fromMap(
+    Map<dynamic, dynamic> data,
+  )   : id = data['id'],
         image = data['image'],
         title = data['title'],
         price = data['price'],
         bgColor = data['bgColor'],
         type = data['type'],
-        description = data['description'];
+        description = data['description'],
+        quantity = data['quantity'];
 
   Map<String, dynamic> toMap() {
     return {
@@ -34,7 +38,8 @@ class Product {
       'price': price,
       'bgColor': bgColor,
       'type': type,
-      'description': description
+      'description': description,
+      'quantity': quantity
     };
   }
 }
@@ -47,14 +52,16 @@ List<Product> product = [
       price: 165,
       bgColor: const Color(0xFFFEFBF9),
       type: 'Shirt',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 1,
       image: AppAssets.shirt1,
       title: "Casual Henley Shirts",
       price: 99,
       type: 'Shirt',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 2,
       image: AppAssets.shirt2,
@@ -62,7 +69,8 @@ List<Product> product = [
       price: 180,
       bgColor: const Color(0xFFF8FEFB),
       type: 'Shirt',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 3,
       image: AppAssets.shirt3,
@@ -70,7 +78,8 @@ List<Product> product = [
       price: 149,
       bgColor: const Color(0xFFEEEEED),
       type: 'Shirt',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 4,
       image: AppAssets.shirt4,
@@ -78,7 +87,8 @@ List<Product> product = [
       price: 109,
       bgColor: const Color(0xFFEEEEED),
       type: 'Shirt',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 5,
       image: AppAssets.shirt5,
@@ -86,7 +96,8 @@ List<Product> product = [
       price: 159,
       bgColor: const Color(0xFFEEEEED),
       type: 'Shirt',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 6,
       image: AppAssets.shirt5,
@@ -94,7 +105,8 @@ List<Product> product = [
       price: 159,
       bgColor: const Color(0xFFEEEEED),
       type: 'Shirt',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 7,
       image: AppAssets.shoes0,
@@ -102,7 +114,8 @@ List<Product> product = [
       price: 449,
       bgColor: const Color(0xFFEEEEED),
       type: 'Shoes',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 8,
       image: AppAssets.shoes1,
@@ -110,7 +123,8 @@ List<Product> product = [
       price: 225,
       bgColor: const Color(0xFFEEEEED),
       type: 'Shoes',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 9,
       image: AppAssets.shoes2,
@@ -118,7 +132,8 @@ List<Product> product = [
       price: 179,
       bgColor: const Color(0xFFEEEEED),
       type: 'Shoes',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 10,
       image: AppAssets.shoes3,
@@ -126,7 +141,8 @@ List<Product> product = [
       price: 169,
       bgColor: const Color(0xFFEEEEED),
       type: 'Shoes',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 11,
       image: AppAssets.shoes4,
@@ -134,7 +150,8 @@ List<Product> product = [
       price: 869,
       bgColor: const Color(0xFFEEEEED),
       type: 'Shoes',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 12,
       image: AppAssets.watch0,
@@ -142,7 +159,8 @@ List<Product> product = [
       price: 869,
       bgColor: const Color(0xFFEEEEED),
       type: 'Watch',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 13,
       image: AppAssets.watch1,
@@ -150,7 +168,8 @@ List<Product> product = [
       price: 672,
       bgColor: const Color(0xFFEEEEED),
       type: 'Watch',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 14,
       image: AppAssets.watch2,
@@ -158,7 +177,8 @@ List<Product> product = [
       price: 899,
       bgColor: const Color(0xFFEEEEED),
       type: 'Watch',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 15,
       image: AppAssets.dress0,
@@ -166,7 +186,8 @@ List<Product> product = [
       price: 139,
       bgColor: const Color(0xFFEEEEED),
       type: 'Dress',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 16,
       image: AppAssets.dress1,
@@ -174,7 +195,8 @@ List<Product> product = [
       price: 159,
       bgColor: const Color(0xFFEEEEED),
       type: 'Dress',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 17,
       image: AppAssets.dress2,
@@ -182,7 +204,8 @@ List<Product> product = [
       price: 99,
       bgColor: const Color(0xFFEEEEED),
       type: 'Dress',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
   Product(
       id: 18,
       image: AppAssets.dress3,
@@ -190,7 +213,8 @@ List<Product> product = [
       price: 109,
       bgColor: const Color(0xFFEEEEED),
       type: 'Dress',
-      description: dummyText),
+      description: dummyText,
+      quantity: 1),
 ];
 
 String dummyText =

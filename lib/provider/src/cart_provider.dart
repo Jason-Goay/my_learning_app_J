@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_learning_app/database/db_helper.dart';
 import 'package:my_learning_app/model/model.dart';
+import 'package:my_learning_app/screen/src/details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartProvider with ChangeNotifier {
@@ -40,19 +41,21 @@ class CartProvider with ChangeNotifier {
   }
 
   addItemToCart(Product product) {
-    cartItem.add(product);
-    notifyListeners();
+    if (!isExist(product)) {
+      cartItem.add(product);
+      addTotalPrice(product.price);
+      notifyListeners();
+    }
   }
 
   removeItemFromCart(int id) {
     final index = cartItem.indexWhere((e) => e.id == id);
-
     cartItem.removeAt(index);
     notifyListeners();
   }
 
   void addTotalPrice(double productPrice) {
-    _totalPrice = _totalPrice + productPrice;
+    _totalPrice = _totalPrice + (productPrice * quantity);
     _setPrefsItem();
     notifyListeners();
   }
@@ -68,8 +71,19 @@ class CartProvider with ChangeNotifier {
     return _totalPrice;
   }
 
-  // void addQuantity(int id) {
-  //   final index = cartItem.indexWhere((e) => e.id == id);
-  //   cartItem
-  // }
+  bool isExist(Product product) {
+    return cartItem.contains(product);
+  }
+
+  incrementQuantity() {
+    _quantity++;
+    notifyListeners();
+  }
+
+  decrementQuantity() {
+    if (_quantity > 0) {
+      _quantity--;
+      notifyListeners();
+    }
+  }
 }

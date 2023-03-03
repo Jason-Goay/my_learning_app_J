@@ -1,3 +1,5 @@
+// https://github.com/iampawan/ChatGPT-Flutter-AIChatBot/tree/main/ios
+
 import 'dart:developer';
 
 import 'package:badges/badges.dart';
@@ -10,6 +12,7 @@ import 'package:my_learning_app/model/model.dart';
 import 'package:my_learning_app/provider/provider.dart';
 import 'package:my_learning_app/screen/src/component/product_card.dart';
 import 'package:my_learning_app/screen/src/details_screen.dart';
+import 'package:my_learning_app/utils/src/constant.dart';
 import 'package:my_learning_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +26,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   ColorScheme get colorScheme => Theme.of(context).colorScheme;
+  TextTheme get textTheme => Theme.of(context).textTheme;
 
   HomeTabProvider get homeTabProvider => context.read<HomeTabProvider>();
 
@@ -66,11 +70,33 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: drawerKey,
+      drawer: Drawer(
+        child: SafeArea(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Column(children: [
+              DrawerItem(
+                  onTap: () {
+                    context.goNamed('favouriteScreen');
+                  },
+                  title: 'Favoutrite',
+                  icon: Icon(Icons.favorite_outline))
+            ]),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(children: [
           myAppBar(),
           buildContent(),
         ]),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.goNamed('chatScreen');
+        },
+        child: const Icon(Icons.chat),
       ),
     );
   }
@@ -83,7 +109,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: Row(children: [
         IconButton(
           icon: Icon(Icons.menu),
-          onPressed: () {},
+          onPressed: () {
+            drawerKey.currentState?.openDrawer();
+          },
         ),
         Padding(
           padding: EdgeInsets.only(left: ScreenUtils.scaleValue(20)),
@@ -97,6 +125,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           padding:
               EdgeInsets.symmetric(horizontal: ScreenUtils.scaleValueW(10)),
           child: Badge(
+            badgeContent: Text('1'),
             badgeColor: AppColor.red,
             padding: EdgeInsets.all(ScreenUtils.scaleValue(4)),
             child: InkWell(
@@ -294,6 +323,30 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     title: e.title,
                   ))
               .toList()),
+    );
+  }
+
+  Widget DrawerItem(
+      {required VoidCallback onTap,
+      required String title,
+      required Widget icon}) {
+    return Container(
+      child: Column(children: [
+        InkWell(
+            onTap: onTap,
+            child: ListTile(
+              title: Text(title,
+                  style: textTheme.headline6?.copyWith(
+                    color: AppColor.greYer,
+                  )),
+              leading: icon,
+            )),
+        Container(
+            padding: EdgeInsets.symmetric(vertical: 1),
+            width: MediaQuery.of(context).size.width,
+            height: 1,
+            color: Colors.black12.withOpacity(0.05)),
+      ]),
     );
   }
 

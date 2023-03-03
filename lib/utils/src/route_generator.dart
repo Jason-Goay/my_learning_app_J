@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:my_learning_app/model/model.dart';
 import 'package:my_learning_app/screen/screen.dart';
 import 'package:my_learning_app/screen/src/cart_screen.dart';
+import 'package:my_learning_app/screen/src/chat_screen.dart';
 import 'package:my_learning_app/screen/src/details_screen.dart';
+import 'package:my_learning_app/screen/src/favourite_screen.dart';
 import 'package:my_learning_app/screen/src/splash_screen.dart';
 
 // class RouteGenerator {
@@ -63,6 +65,19 @@ final GoRouter router = GoRouter(
                   return CartScreen();
                 },
               ),
+              GoRoute(
+                name: 'favouriteScreen',
+                path: 'favourite_screen',
+                builder: (BuildContext context, GoRouterState state) {
+                  return FavouriteScreen();
+                },
+              ),
+              GoRoute(
+                  name: 'chatScreen',
+                  path: 'chat_screen',
+                  builder: (BuildContext context, GoRouterState state) {
+                    return const ChatScreen();
+                  })
             ]),
       ],
     ),

@@ -37,6 +37,17 @@ class DBHelper {
     return product;
   }
 
+  Future<int> updateQuantity(Product product) async {
+    var dbClient = await database;
+    return await dbClient!.update('product', product.toMap(),
+        where: 'id = ?', whereArgs: [product.id]);
+  }
+
+  Future<int> delete(int id) async {
+    var dbClient = await database;
+    return await dbClient!.delete('product', where: 'id = ?', whereArgs: [id]);
+  }
+
   // getting all the items in the list from the database
   Future<List<Product>> getProductList() async {
     var dbClient = await database;
@@ -45,3 +56,5 @@ class DBHelper {
     return queryResult.map((e) => Product.fromMap(e)).toList();
   }
 }
+
+// https://github.com/axiftaj/Flutter-Shopping-Cart-With-Provider/blob/main/lib/cart_screen.dart

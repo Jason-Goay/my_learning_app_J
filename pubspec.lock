@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
+  auto_size_text_pk:
+    dependency: transitive
+    description:
+      name: auto_size_text_pk
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   badges:
     dependency: "direct main"
     description:
@@ -43,6 +50,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1"
+  chat_gpt_sdk:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "7e6565831cd9b8b74a7b376042f952d6c54bea60"
+      url: "https://github.com/iampawan/Flutter-ChatGPT.git"
+    source: git
+    version: "1.0.2+4"
   clock:
     dependency: transitive
     description:
@@ -64,6 +80,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.6"
   fake_async:
     dependency: transitive
     description:
@@ -90,6 +113,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.2"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -126,6 +156,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.5"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.2"
   intl:
     dependency: "direct main"
     description:
@@ -397,6 +434,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
+  typed_data:
+    dependency: transitive
+    description:
+      name: typed_data
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.3.1"
   vector_math:
     dependency: transitive
     description:
@@ -404,6 +448,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  velocity_x:
+    dependency: "direct main"
+    description:
+      name: velocity_x
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.6.0"
+  vxstate:
+    dependency: transitive
+    description:
+      name: vxstate
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.0"
   win32:
     dependency: transitive
     description:
@@ -426,5 +484,5 @@ packages:
     source: hosted
     version: "6.1.0"
 sdks:
-  dart: ">=2.18.4 <3.0.0"
+  dart: ">=2.18.6 <3.0.0"
   flutter: ">=3.3.0"
