@@ -62,7 +62,7 @@ class _CartScreenState extends State<CartScreen> {
               heightFactor: ScreenUtils.scaleValueH(18),
               child: Text(
                 'Your Cart is Empty',
-                style: textTheme.headline5?.copyWith(color: AppColor.aquaBlue),
+                style: textTheme.headline5?.copyWith(color: AppColor.darkBlue),
               ),
             )
           : Column(

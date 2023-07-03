@@ -60,7 +60,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               heightFactor: ScreenUtils.scaleValueH(18),
               child: Text(
                 'Your Favourite Screen is Empty',
-                style: textTheme.headline5?.copyWith(color: AppColor.aquaBlue),
+                style: textTheme.headline5?.copyWith(color: AppColor.darkBlue),
               ),
             )
           : Column(children: [

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final Color? background;
@@ -31,7 +29,7 @@ class CustomElevatedButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
               backgroundColor: background ?? colorScheme.primary,
               shape: shape,
-              minimumSize: Size(minimumSize!, 40) ?? const Size(20, 40))),
+              minimumSize: const Size(50, 40) ?? const Size(20, 40))),
       child: ElevatedButton(
         onPressed: onPressed,
         child: child,

@@ -22,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(seconds: 3), () {
-        context.goNamed('homeScreen');
+        context.goNamed('mainScreen');
+        // context.goNamed('signInScreen');
         // Navigator.pushReplacementNamed(context, HomeScreen.routeName);
       });
     });

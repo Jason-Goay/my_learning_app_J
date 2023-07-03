@@ -52,6 +52,12 @@ dependencies:
   chat_gpt_sdk:
     git:
       url: https://github.com/iampawan/Flutter-ChatGPT.git
+  animate_do: ^3.0.2
+  firebase_auth: ^4.2.10
+  firebase_core: ^2.7.1
+  json_annotation: ^4.7.0
+  freezed_annotation: ^2.2.0
+  cloud_firestore: ^4.4.5
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +69,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  freezed: ^2.2.1
+  build_runner: ^2.3.1
+  json_serializable: ^6.5.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

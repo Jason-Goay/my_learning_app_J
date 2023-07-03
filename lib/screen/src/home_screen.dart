@@ -27,6 +27,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   ColorScheme get colorScheme => Theme.of(context).colorScheme;
   TextTheme get textTheme => Theme.of(context).textTheme;
+  AuthProvider get authProvider =>
+      Provider.of<AuthProvider>(context, listen: false);
 
   HomeTabProvider get homeTabProvider => context.read<HomeTabProvider>();
 
@@ -70,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: drawerKey,
+      // key: drawerKey,
       drawer: Drawer(
         child: SafeArea(
           child: Container(
@@ -81,7 +83,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     context.goNamed('favouriteScreen');
                   },
                   title: 'Favoutrite',
-                  icon: Icon(Icons.favorite_outline))
+                  icon: const Icon(Icons.favorite_outline)),
+              DrawerItem(
+                  onTap: () {
+                    context.read<AuthProvider>().logOut(context);
+                    if (context.read<AuthProvider>().user.uid == null) {
+                      context.goNamed('signInScreen');
+                    }
+                  },
+                  title: 'Sign Out',
+                  icon: const Icon(Icons.logout))
             ]),
           ),
         ),
@@ -120,18 +131,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        Spacer(),
+        const Spacer(),
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: ScreenUtils.scaleValueW(10)),
-          child: Badge(
-            badgeContent: Text('1'),
-            badgeColor: AppColor.red,
-            padding: EdgeInsets.all(ScreenUtils.scaleValue(4)),
-            child: InkWell(
-              child: Icon(Icons.shopping_cart),
-              onTap: () => context.goNamed('cartScreen'),
-            ),
+          child: Consumer<CartProvider>(
+            builder: (context, provider, child) {
+              return Badge(
+                badgeContent: Text("${provider.cartItem.length}"),
+                badgeColor: AppColor.red,
+                padding: EdgeInsets.all(ScreenUtils.scaleValue(4)),
+                child: InkWell(
+                  child: const Icon(Icons.shopping_cart),
+                  onTap: () => context.goNamed('cartScreen'),
+                ),
+              );
+            },
           ),
         )
       ]),
@@ -176,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   height: ScreenUtils.scaleValueH(25),
                   width: ScreenUtils.scaleValueW(300),
                   child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Search product..."),
                   )),
@@ -323,6 +338,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     title: e.title,
                   ))
               .toList()),
+    );
+  }
+
+  Widget drawerHeader() {
+    return const Material(
+      color: Colors.lightBlue,
+      child: InkWell(),
     );
   }
 

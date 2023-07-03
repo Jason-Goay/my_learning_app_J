@@ -6,6 +6,8 @@ import 'package:my_learning_app/screen/src/cart_screen.dart';
 import 'package:my_learning_app/screen/src/chat_screen.dart';
 import 'package:my_learning_app/screen/src/details_screen.dart';
 import 'package:my_learning_app/screen/src/favourite_screen.dart';
+import 'package:my_learning_app/screen/src/main_screen.dart';
+import 'package:my_learning_app/screen/src/sign_in_screen.dart';
 import 'package:my_learning_app/screen/src/splash_screen.dart';
 
 // class RouteGenerator {
@@ -32,54 +34,77 @@ import 'package:my_learning_app/screen/src/splash_screen.dart';
 //   }
 // }
 
-final GoRouter router = GoRouter(
-  routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const SplashScreen();
-      },
-      routes: <RouteBase>[
-        GoRoute(
-            name: 'homeScreen',
-            path: 'home_screen',
+final GoRouter router = GoRouter(routes: <RouteBase>[
+  GoRoute(
+    path: '/',
+    builder: (BuildContext context, GoRouterState state) {
+      return const SplashScreen();
+    },
+    routes: <RouteBase>[
+      GoRoute(
+        name: 'signInScreen',
+        path: 'sign_in_screen',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SignInScreen();
+        },
+        routes: <RouteBase>[
+          GoRoute(
+            name: 'signUpScreen',
+            path: 'sign_up_screen',
             builder: (BuildContext context, GoRouterState state) {
-              return const HomeScreen();
+              return const SignUpScreen();
+            },
+          ),
+          GoRoute(
+            name: 'mainScreen',
+            path: 'main_screen',
+            builder: (BuildContext context, GoRouterState state) {
+              return const MainScreen();
             },
             routes: <RouteBase>[
               GoRoute(
-                name: 'detailsScreen',
-                path: 'details_screen',
-                builder: (BuildContext context, GoRouterState state) {
-                  DetailsScreenArgument args =
-                      state.extra as DetailsScreenArgument;
-                  return DetailsScreen(
-                    productArgument: args,
-                  );
-                },
-              ),
-              GoRoute(
-                name: 'cartScreen',
-                path: 'cart_screen',
-                builder: (BuildContext context, GoRouterState state) {
-                  return CartScreen();
-                },
-              ),
-              GoRoute(
-                name: 'favouriteScreen',
-                path: 'favourite_screen',
-                builder: (BuildContext context, GoRouterState state) {
-                  return FavouriteScreen();
-                },
-              ),
-              GoRoute(
-                  name: 'chatScreen',
-                  path: 'chat_screen',
+                  name: 'homeScreen',
+                  path: 'home_screen',
                   builder: (BuildContext context, GoRouterState state) {
-                    return const ChatScreen();
-                  })
-            ]),
-      ],
-    ),
-  ],
-);
+                    return const HomeScreen();
+                  },
+                  routes: <RouteBase>[
+                    GoRoute(
+                      name: 'detailsScreen',
+                      path: 'details_screen',
+                      builder: (BuildContext context, GoRouterState state) {
+                        DetailsScreenArgument args =
+                            state.extra as DetailsScreenArgument;
+                        return DetailsScreen(
+                          productArgument: args,
+                        );
+                      },
+                    ),
+                    GoRoute(
+                      name: 'cartScreen',
+                      path: 'cart_screen',
+                      builder: (BuildContext context, GoRouterState state) {
+                        return const CartScreen();
+                      },
+                    ),
+                    GoRoute(
+                      name: 'favouriteScreen',
+                      path: 'favourite_screen',
+                      builder: (BuildContext context, GoRouterState state) {
+                        return FavouriteScreen();
+                      },
+                    ),
+                    GoRoute(
+                        name: 'chatScreen',
+                        path: 'chat_screen',
+                        builder: (BuildContext context, GoRouterState state) {
+                          return const ChatScreen();
+                        })
+                  ]),
+            ],
+          ),
+        ],
+      ),
+    ],
+  )
+]);
