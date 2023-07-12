@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_learning_app/dialog/dialog_settings.dart';
-import 'package:my_learning_app/widget/widget.dart';
 
 enum Status {
   notSignedIn,

@@ -131,18 +131,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
               children: [
                 Text(
                   widget.productArgument.product.title,
-                  style: textTheme.headline5,
+                  style: textTheme.headlineSmall,
                 ),
                 Text(
                   '\$${widget.productArgument.product.price.toString()}',
-                  style: textTheme.headline6,
+                  style: textTheme.titleLarge,
                 ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5.0, vertical: 20),
                   child: Text(
                     widget.productArgument.product.description,
-                    style: textTheme.bodyText1,
+                    style: textTheme.bodyLarge,
                   ),
                 ),
                 buildQuantityButton(),

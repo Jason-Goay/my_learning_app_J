@@ -2,7 +2,7 @@
 
 import 'dart:developer';
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       Provider.of<AuthProvider>(context, listen: false);
 
   HomeTabProvider get homeTabProvider => context.read<HomeTabProvider>();
+
+  // final GlobalKey<ScaffoldState> homeDrawerKey = GlobalKey();
 
   late TabController _tabController;
   final List<Tab> tabs = [
@@ -72,31 +74,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // key: drawerKey,
-      drawer: Drawer(
-        child: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            child: Column(children: [
-              DrawerItem(
-                  onTap: () {
-                    context.goNamed('favouriteScreen');
-                  },
-                  title: 'Favoutrite',
-                  icon: const Icon(Icons.favorite_outline)),
-              DrawerItem(
-                  onTap: () {
-                    context.read<AuthProvider>().logOut(context);
-                    if (context.read<AuthProvider>().user.uid == null) {
-                      context.goNamed('signInScreen');
-                    }
-                  },
-                  title: 'Sign Out',
-                  icon: const Icon(Icons.logout))
-            ]),
-          ),
-        ),
-      ),
+      key: drawerKey,
+      // drawer: Drawer(
+      //   child: SafeArea(
+      //     child: Container(
+      //       padding: const EdgeInsets.all(10),
+      //       child: Column(children: [
+      //         DrawerItem(
+      //             onTap: () {
+      //               context.goNamed('favouriteScreen');
+      //             },
+      //             title: 'Favoutrite',
+      //             icon: const Icon(Icons.favorite_outline)),
+      //         DrawerItem(
+      //             onTap: () {
+      //               context.read<AuthProvider>().logOut(context);
+      //               if (context.read<AuthProvider>().user.uid == null) {
+      //                 context.goNamed('signInScreen');
+      //               }
+      //             },
+      //             title: 'Sign Out',
+      //             icon: const Icon(Icons.logout))
+      //       ]),
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: Column(children: [
           myAppBar(),
@@ -137,10 +139,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               EdgeInsets.symmetric(horizontal: ScreenUtils.scaleValueW(10)),
           child: Consumer<CartProvider>(
             builder: (context, provider, child) {
-              return Badge(
+              return badges.Badge(
                 badgeContent: Text("${provider.cartItem.length}"),
-                badgeColor: AppColor.red,
-                padding: EdgeInsets.all(ScreenUtils.scaleValue(4)),
                 child: InkWell(
                   child: const Icon(Icons.shopping_cart),
                   onTap: () => context.goNamed('cartScreen'),
@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         border: InputBorder.none,
                         hintText: "Search product..."),
                   )),
-              Icon(Icons.search)
+              const Icon(Icons.search)
             ],
           ),
         ),

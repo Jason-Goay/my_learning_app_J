@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_learning_app/database/db_helper.dart';
 import 'package:my_learning_app/model/model.dart';
-import 'package:my_learning_app/screen/src/details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartProvider with ChangeNotifier {
